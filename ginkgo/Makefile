@@ -6,7 +6,7 @@ OPTIMIZE_FLAGS       = -O3
 
 GINKGO_ROOT          = /home/viv0009/opt/ginkgo/
 INCLUDES             = -I$(GINKGO_ROOT)/include
-LIBS                 = -L$(GINKGO_ROOT)/lib64 -lginkgo -lpthread -fopenmp
+LIBS                 = -L$(GINKGO_ROOT)/lib64 -lginkgo -lginkgo_hip -lginkgo_cuda -lginkgo_device -lginkgo_omp -lginkgo_dpcpp -lpthread -fopenmp
 
 EXECS                = ginkgo_precond
 .PHONY: all clean cleanall
