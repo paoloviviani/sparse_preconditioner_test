@@ -40,7 +40,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <map>
 #include <memory>
 #include <string>
- 
+#include <chrono>
  
 const std::map<std::string, std::function<std::shared_ptr<gko::Executor>()>>
     executors{{"reference", [] { return gko::ReferenceExecutor::create(); }},
@@ -139,9 +139,14 @@ int main(int argc, char* argv[])
         auto jacobi = try_generate([&] { return factory->generate(mtx); });
         output(jacobi.get(), matrix + ".jacobi" + output_suffix);
     } else if (precond == "ilu") {
+
+        auto t_start = std::chrono::high_resolution_clock::now();
         auto ilu = gko::as<gko::Composition<>>(try_generate([&] {
             return gko::factorization::Ilu<>::build().on(exec)->generate(mtx);
         }));
+        auto t_end = std::chrono::high_resolution_clock::now();
+        std::cout << std::chrono::duration<double, std::milli>(t_end-t_start).count() << std::endl;
+        
         output(gko::as<gko::matrix::Csr<>>(ilu->get_operators()[0].get()),
                matrix + ".ilu-l");
         output(gko::as<gko::matrix::Csr<>>(ilu->get_operators()[1].get()),
@@ -165,8 +170,13 @@ int main(int argc, char* argv[])
         if (argc >= 6) {
             factory->get_parameters().fill_in_limit = std::stod(argv[5]);
         }
+        
+        auto t_start = std::chrono::high_resolution_clock::now();
         auto ilut = gko::as<gko::Composition<>>(
             try_generate([&] { return factory->generate(mtx); }));
+        auto t_end = std::chrono::high_resolution_clock::now();
+        std::cout << std::chrono::duration<double, std::milli>(t_end-t_start).count() << std::endl;
+
         output(gko::as<gko::matrix::Csr<>>(ilut->get_operators()[0].get()),
                matrix + ".parilut" + output_suffix + "-l");
         output(gko::as<gko::matrix::Csr<>>(ilut->get_operators()[1].get()),

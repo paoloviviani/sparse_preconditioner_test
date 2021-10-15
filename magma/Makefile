@@ -1,7 +1,7 @@
 CC                   = gcc
 CXX                  = g++
 CCFLAGS              = -Wall -Wfatal-errors -Wno-unused-variable -DADD_
-CFLAGS               = -std=c++14
+CFLAGS               = -std=c++17
 OPTIMIZE_FLAGS       = -O3
 
 MAGMA_ROOT           = /home/viv0009/opt/magma/
