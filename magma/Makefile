@@ -8,7 +8,7 @@ MAGMA_ROOT           = /home/viv0009/opt/magma/
 INCLUDES             = -I$(MAGMA_ROOT)/include -I$(MAGMA_ROOT)/include/testing #copy all .h and .hpp files from build/testing directory
 LIBS                 = -L$(MAGMA_ROOT)/lib -lmagma -lmagma_sparse -lpthread -fopenmp
 
-EXECS                = magma_precond
+EXECS                = magma_precond magma_solver
 .PHONY: all clean cleanall
 .SUFFIXES: .c .cpp .o
 
@@ -19,6 +19,8 @@ all: $(EXECS)
 
 # Execs
 magma_precond: magma_precond.o
+	$(CXX) -o $@ $^ $(LIBS) $(CCFLAGS) $(CFLAGS) $(OPTIMIZE_FLAGS)
+magma_solver: magma_solver.o
 	$(CXX) -o $@ $^ $(LIBS) $(CCFLAGS) $(CFLAGS) $(OPTIMIZE_FLAGS)
 
 clean:
