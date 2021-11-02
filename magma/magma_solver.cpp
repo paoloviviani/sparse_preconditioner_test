@@ -38,7 +38,7 @@ int main(  int argc, char** argv )
     
     double one = MAGMA_D_MAKE(1.0, 0.0);
     double zero = MAGMA_D_MAKE(0.0, 0.0);
-    magma_d_matrix A={Magma_CSR}, B={Magma_CSR}, dB={Magma_CSR};
+    magma_d_matrix A={Magma_CSR}, B={Magma_DENSE}, dB={Magma_DENSE};
     magma_d_matrix x={Magma_CSR}, x_h={Magma_CSR}, b_h={Magma_DENSE}, b={Magma_DENSE};
     
     int i=1;
@@ -48,6 +48,7 @@ int main(  int argc, char** argv )
 
     TESTING_CHECK( magma_dsolverinfo_init( &zopts.solver_par, &zopts.precond_par, queue ));
     // more iterations
+
     
     while( i < argc ) {
         if ( strcmp("LAPLACE2D", argv[i]) == 0 && i+1 < argc ) {   // Laplace test
@@ -60,7 +61,6 @@ int main(  int argc, char** argv )
             TESTING_CHECK( magma_dvread( &b_h, A.num_cols, argv[i+1], queue ));
             i++;
         }
-            printf("DEBUG\n");
 
         printf( "\n%% matrix info: %lld-by-%lld with %lld nonzeros\n\n",
                 (long long) A.num_rows, (long long) A.num_cols, (long long) A.nnz );
