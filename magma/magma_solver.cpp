@@ -38,7 +38,7 @@ int main(  int argc, char** argv )
     
     double one = MAGMA_D_MAKE(1.0, 0.0);
     double zero = MAGMA_D_MAKE(0.0, 0.0);
-    magma_d_matrix A={Magma_CSR}, B={Magma_DENSE}, dB={Magma_DENSE};
+    magma_d_matrix A={Magma_CSR}, B={Magma_CSR}, dB={Magma_CSR};
     magma_d_matrix x={Magma_CSR}, x_h={Magma_CSR}, b_h={Magma_DENSE}, b={Magma_DENSE};
     
     int i=1;
