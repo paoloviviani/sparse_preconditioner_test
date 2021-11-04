@@ -95,7 +95,7 @@ int main(  int argc, char** argv )
         
         // preconditioner
         if ( zopts.solver_par.solver != Magma_ITERREF ) {
-            TESTIeNG_CHECK( magma_s_precondsetup( A, b, &zopts.solver_par, &zopts.precond_par, queue ) );
+            TESTING_CHECK( magma_s_precondsetup( A, b, &zopts.solver_par, &zopts.precond_par, queue ) );
         }
         // make sure alignment is 1 for SELLP
         B.alignment = 1;
