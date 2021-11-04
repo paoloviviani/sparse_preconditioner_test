@@ -36,3 +36,4 @@ core.*
 .vscode
 data/prob_*
 magma/magma_solver
+magma/magma_precond
