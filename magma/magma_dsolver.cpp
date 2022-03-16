@@ -29,6 +29,7 @@ int main(  int argc, char** argv )
     magma_int_t info = 0;
     TESTING_CHECK( magma_init() );
     magma_print_environment();
+    cusparseCreate();
 
     magma_dopts zopts;
     magma_queue_t queue=NULL;

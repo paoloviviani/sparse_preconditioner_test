@@ -37,3 +37,5 @@ core.*
 data/prob_*
 magma/magma_solver
 magma/magma_precond
+petsc_build.txt
+magma/help.txt
